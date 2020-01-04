@@ -1,0 +1,79 @@
+<!-- Describe task in general -->
+<p>
+    This mission is an adaptation of the "Unruly" game (from
+    <a href="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/">
+    Simon Tatham's Portable Puzzle Collection</a>).
+    If you are lost or just want to play, the game is available
+    <a href="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/js/unruly.html">here</a>.
+</p>
+
+<p>
+    You have an uncomplete rectangular grid
+    and have to colour all the cells, either black or white,
+    with two constraints:
+    <ul>
+        <li>No three consecutives cells, horizontally or vertically, are all black or all white.</li>
+        <li>Each row and column contains as many black cells as white cells.</li>
+    </ul>
+    Obviously, you can only change empty cells, not colored cells.
+</p>
+
+<p>
+    The grid will be represented by a tuple of strings.
+    Empty cells are represented by '.', black cells by 'B' and white cells by 'W'.
+</p>
+
+<pre class="for_info_only" style="text-align:center">
+<img src="{{MEDIA}}unruly-example.png" alt="6x6 example image" title="6x6 easy example"/>
+
+('......',          ('BBWWBW',
+ '..B...',           'BWBWBW',
+ 'W.B.W.',           'WWBBWB',
+ '......',           'BBWWBW',
+ 'W...W.',           'WBWBWB',
+ 'WW..W.')           'WWBBWB')
+</pre>
+
+
+<!-- Explain input and output values -->
+<p>
+    <strong>Input:</strong>
+    A tuple of strings.
+</p>
+
+<p>
+    <strong>Output:</strong>
+    A tuple/list/iterable of strings.
+</p>
+
+
+<!-- Put some usage examples -->
+<div class="for_info_only">
+<p>
+    <strong>Example:</strong>
+</p>
+
+<pre class="brush: python">
+unruly(('......',
+        '..B...',
+        'W.B.W.',
+        '......',
+        'W...W.',
+        'WW..W.')) == ('BBWWBW',
+                       'BWBWBW',
+                       'WWBBWB',
+                       'BBWWBW',
+                       'WBWBWB',
+                       'WWBBWB')
+</pre>
+</div>
+
+<p>
+    <strong>Preconditions:</strong>
+    <ul>
+        <li>Given puzzles are solvable.</li>
+        <li>You can solve all puzzles without making any guesses.</li>
+        <li>6 &le; len(grid) &le; 40 and 6 &le; len(grid[0]) &le; 30.</li>
+        <li>all(len(row) == len(grid[0]) for row in grid).</li>
+    </ul>
+</p>
