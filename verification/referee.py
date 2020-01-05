@@ -31,25 +31,30 @@ def checker(grid, result):
     forbidden_chars = ''.join(set.union(*map(set, result)) - set('WB.'))
     assert not forbidden_chars, \
         f'Only the chars "WB." are allowed, not {forbidden_chars!r}.'
-    forbidden_changes = sum(c1 != c2 for r1, r2 in zip(grid, result)
-                            for c1, c2 in zip(r1, r2) if c1 != '.')
+    forbidden_changes = [(y, x) for y, (r1, r2) in enumerate(zip(grid, result))
+                         for x, (c1, c2) in enumerate(zip(r1, r2)) if c1 != '.' and c1 != c2]
     assert not forbidden_changes, \
-        f'You changed {forbidden_changes} cells given at the start.'
+        [f'You changed {len(forbidden_changes)} cells given at the start.',
+         'cell', forbidden_changes]
+
     miss = sum(row.count('.') for row in result)
     # if miss:
     #     print('You can look what is missing here:')
     #     print('https://www.chiark.greenend.org.uk/~sgtatham/puzzles/js/'
     #           f'unruly.html#{grid2spec(result)}')
     #     print('You just need to open a new webpage with that url.')
-    assert not miss, f'{miss} cells are still empty.'
+    assert not miss, [f'{miss} cells are still empty.',
+                      'empty', []]
     columns = map(''.join, zip(*result))
     for _type, lines in (('row', result), ('column', columns)):
         for n, line in enumerate(lines):
             Ws, Bs = map(line.count, 'WB')
-            assert Ws == Bs, f'{Ws} W & {Bs} B in {_type} {n} {line!r}.'
+            assert Ws == Bs, [f'{Ws} W & {Bs} B in {_type} {n} {line!r}.',
+                              _type, n]
             for item in 'WB':
                 assert item * 3 not in line, \
-                    f'{item * 3} found in {_type} {n} {line!r}.'
+                    [f'{item * 3} found in {_type} {n} {line!r}.',
+                     _type, n]
 
 
 cover_tuple = '''
