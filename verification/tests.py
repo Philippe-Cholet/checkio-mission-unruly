@@ -36,9 +36,11 @@ def spec2grid(spec):
     return tuple(map(''.join, lines))
 
 
-TESTS = {'Basic': [], 'Extra': []}
+GRIDS = tuple(map(spec2grid, SPECIFICS))
+# from pprint import pprint
+# pprint(GRIDS, width=60)
 
-for n, spec in enumerate(SPECIFICS):
+TESTS = {'Basic': [], 'Extra': []}
+for n, grid in enumerate(GRIDS):
     category = ('Basic', 'Extra')[n >= 3]
-    grid = spec2grid(spec)
     TESTS[category].append({'input': grid, 'answer': grid})
